@@ -18,7 +18,7 @@ import sys
 from pathlib import Path
 
 import nbformat as nbf
-from nbformat.v4 import new_code_cell, new_markdown_cell, new_notebook
+from nbformat.v4 import new_markdown_cell, new_notebook
 
 BRANCH = "main"
 
@@ -50,44 +50,7 @@ def scaffold(num: str, slug: str, title: str) -> Path:
         new_markdown_cell(
             f"[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)]({badge_url})"
         ),
-        new_markdown_cell(
-            f"""# Lab {num} — {title}
-### Python for Text Analytics
-
-*One or two sentences on why this lab matters and how it connects to the course goal.*
-
-**By the end of this lab you will be able to:**
-1. TODO
-2. TODO
-3. TODO
-
-Read each text cell, run each code cell, and complete the exercises."""
-        ),
-        new_markdown_cell(
-            """> ⚠️ **Before you start:** go to **File → Save a copy in Drive** so your work is kept.
-> Colab forgets everything if the runtime restarts."""
-        ),
-        new_markdown_cell("## 1. TODO — section title\n\n*Explain the idea in plain language, then show it.*"),
-        new_code_cell('# worked example\nprint("hello")'),
-        new_markdown_cell(
-            """### ✏️ Exercise 1 — TODO
-
-*State the task clearly. Tell students exactly what to produce.*"""
-        ),
-        new_code_cell("# TODO: your code here\n"),
-        new_code_cell('# @solution\nprint("the answer")'),
-        new_markdown_cell(
-            f"""## Wrap-up
-
-*Recap what was learned and why it matters for what comes next.*
-
-**Before you leave:**
-- Make sure every cell runs top-to-bottom without errors.
-- **File → Save a copy in Drive** to keep your work.
-- To submit: **File → Download → Download .ipynb**, then upload it to the course page.
-
-**Next week:** TODO"""
-        ),
+        new_markdown_cell(f"# Lab {num} — {title}\n\n### Python for Text Analytics"),
     ]
 
     nb = new_notebook()
