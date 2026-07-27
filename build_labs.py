@@ -1,15 +1,15 @@
-"""Build student + solution notebooks from a master notebook.
+"""Build the student notebook from a master notebook.
+
+Masters live under  solutions/<lab>/labNN.ipynb  and double as the answer key
+(they contain the # @solution cells). This script generates the student-facing
+notebook, with answers stripped, under  labs/<lab>/labNN_student.ipynb.
 
 A cell counts as a SOLUTION cell if either:
   * its first non-empty line is exactly  # @solution   (recommended), or
   * it carries the notebook metadata tag 'solution'.
 
 Usage:
-    python build_labs.py labs/lab01_setup_basics/lab01.ipynb [more masters...]
-
-For each master `labNN.ipynb` it writes, in the same folder:
-    labNN_student.ipynb     <- solution cells removed
-    labNN_solutions.ipynb   <- full version (all cells kept)
+    python build_labs.py solutions/lab01_setup_basics/lab01.ipynb [more masters...]
 """
 import sys
 from pathlib import Path
@@ -25,28 +25,32 @@ def is_solution(cell) -> bool:
     return first == "# @solution"
 
 
+def student_path_for(master: Path) -> Path:
+    parts = list(master.parts)
+    if parts and parts[0] == "solutions":       # solutions/<lab>/  ->  labs/<lab>/
+        parts[0] = "labs"
+    else:                                        # fallback if run from elsewhere
+        parts = ["labs", master.parent.name, master.name]
+    return Path(*parts[:-1]) / f"{master.stem}_student.ipynb"
+
+
 def build(master_path: str) -> None:
     master = Path(master_path)
     nb = nbformat.read(master, as_version=4)
+    removed = sum(is_solution(c) for c in nb.cells)
+    nb.cells = [c for c in nb.cells if not is_solution(c)]
 
-    student = nbformat.read(master, as_version=4)
-    student.cells = [c for c in student.cells if not is_solution(c)]
-
-    stem = master.stem
-    student_path = master.with_name(f"{stem}_student.ipynb")
-    solutions_path = master.with_name(f"{stem}_solutions.ipynb")
-
-    nbformat.write(student, student_path)
-    nbformat.write(nb, solutions_path)
-    n_removed = len(nb.cells) - len(student.cells)
-    print(f"  {student_path.name}   (student, {n_removed} solution cell(s) removed)")
-    print(f"  {solutions_path.name} (solutions, full)")
+    student_path = student_path_for(master)
+    student_path.parent.mkdir(parents=True, exist_ok=True)
+    nbformat.write(nb, student_path)
+    print(f"  answer key : {master}")
+    print(f"  student -> : {student_path}   ({removed} solution cell(s) stripped)")
 
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print("Usage: python build_labs.py <master.ipynb> [<master2.ipynb> ...]")
+        print("Usage: python build_labs.py solutions/<lab>/labNN.ipynb [more...]")
         sys.exit(1)
-    for path in sys.argv[1:]:
-        print(f"Building from {path}:")
-        build(path)
+    for p in sys.argv[1:]:
+        print(f"Building from {p}:")
+        build(p)
