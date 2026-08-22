@@ -50,7 +50,7 @@ def scaffold(num: str, slug: str, title: str) -> Path:
         new_markdown_cell(
             f"[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)]({badge_url})"
         ),
-        new_markdown_cell(f"# Lab {num} — {title}\n\n### Python for Text Analytics"),
+        new_markdown_cell(f"# Lab {num} — {title}\n\n### Digital Skills and Business Decisioning Using Python"),
     ]
 
     nb = new_notebook()
