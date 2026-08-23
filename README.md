@@ -1,7 +1,3 @@
-# README.md
-
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
-
 ## What this repo is
 
 Course materials (Jupyter notebooks) for the Python Text Analytics Lab, University of Piraeus, Department of Economics. Students run the notebooks in Google Colab.
