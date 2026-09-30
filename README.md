@@ -2,13 +2,38 @@
 
 Course materials (Jupyter notebooks) for the Python Text Analytics Lab, University of Piraeus, Department of Economics. Students run the notebooks in Google Colab.
 
+## Labs
+
+| Lab | Topic | Student notebook |
+|---|---|---|
+| 01 | Getting Started with Jupyter Notebooks in Google Colab | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/JanNikolaidovic/python-text-analytics-lab/blob/main/labs/lab01_setup_basics/lab01_student.ipynb) |
+| 02 | Variables & Simple Data Types (Part 1: Strings) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/JanNikolaidovic/python-text-analytics-lab/blob/main/labs/lab02_variables_data_types_part1/lab02_student.ipynb) |
+| 03 | Variables & Simple Data Types (Part 2: Numbers & Operations) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/JanNikolaidovic/python-text-analytics-lab/blob/main/labs/lab03_variables_data_types_part2/lab03_student.ipynb) |
+| 04 | Data Structures | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/JanNikolaidovic/python-text-analytics-lab/blob/main/labs/lab04_data_structures/lab04_student.ipynb) |
+| 05 | Control Flow | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/JanNikolaidovic/python-text-analytics-lab/blob/main/labs/lab05_control_flow/lab05_student.ipynb) |
+| 06 | Functions | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/JanNikolaidovic/python-text-analytics-lab/blob/main/labs/lab06_functions/lab06_student.ipynb) |
+| 07 | Files & Exceptions | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/JanNikolaidovic/python-text-analytics-lab/blob/main/labs/lab07_files_exceptions/lab07_student.ipynb) |
+| 08 | Text Processing Toolkit | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/JanNikolaidovic/python-text-analytics-lab/blob/main/labs/lab08_text_processing/lab08_student.ipynb) |
+| 09 | Regular Expressions for Text Cleaning | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/JanNikolaidovic/python-text-analytics-lab/blob/main/labs/lab09_regular_expressions/lab09_student.ipynb) |
+| 10 | Text as Vectors | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/JanNikolaidovic/python-text-analytics-lab/blob/main/labs/lab10_text_as_vectors/lab10_student.ipynb) |
+| 11 | NumPy | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/JanNikolaidovic/python-text-analytics-lab/blob/main/labs/lab11_numpy/lab11_student.ipynb) |
+| 12 | pandas I: Loading and Selecting Data | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/JanNikolaidovic/python-text-analytics-lab/blob/main/labs/lab12_pandas_loading_selecting/lab12_student.ipynb) |
+| 13 | pandas II: Cleaning Text Data | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/JanNikolaidovic/python-text-analytics-lab/blob/main/labs/lab13_pandas_cleaning/lab13_student.ipynb) |
+| 14 | pandas III: Grouping and the Dependent Variable | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/JanNikolaidovic/python-text-analytics-lab/blob/main/labs/lab14_pandas_grouping_dv/lab14_student.ipynb) |
+| 15 | Data Visualization with Matplotlib and Seaborn | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/JanNikolaidovic/python-text-analytics-lab/blob/main/labs/lab15_visualization/lab15_student.ipynb) |
+| 16 | Exploratory Data Analysis End to End | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/JanNikolaidovic/python-text-analytics-lab/blob/main/labs/lab16_eda_end_to_end/lab16_student.ipynb) |
+
+## Data
+
+`data/` holds the course's running dataset, loaded by the labs straight from GitHub (raw URLs), so it must be pushed before labs 08+ work in Colab. See [data/README.md](data/README.md) for source and licence.
+
 ## Setup
 
 ```bash
 source .venv/bin/activate
 ```
 
-`.venv` already contains the dependencies (nbformat, nbstripout, jupyter, etc.). There is no requirements.txt/pyproject.toml — the venv is the source of truth.
+`.venv` already contains the dependencies (nbformat, nbstripout, jupyter, etc.). `requirements.txt` is a `pip freeze` of the venv (the venv remains the source of truth). Labs 11+ use numpy, pandas, matplotlib and seaborn, which are preinstalled in Colab, so no install cell is needed.
 
 ## The master/student build pipeline
 
