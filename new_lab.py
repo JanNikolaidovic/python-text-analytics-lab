@@ -2,7 +2,6 @@
 """Scaffold a new lab master notebook.
 
 Creates  solutions/labNN_<slug>/labNN.ipynb  pre-filled with:
-  * a correct "Open in Colab" badge (URL derived from your git remote)
   * a title/objectives block
   * one worked-example section and one exercise (with a # @solution cell)
 
@@ -12,27 +11,11 @@ Usage:
 Then edit the notebook in VS Code, and build the student version with:
     python build_labs.py solutions/lab02_data_structures/lab02.ipynb
 """
-import re
-import subprocess
 import sys
 from pathlib import Path
 
 import nbformat as nbf
 from nbformat.v4 import new_markdown_cell, new_notebook
-
-BRANCH = "main"
-
-
-def github_slug() -> str:
-    """Return 'user/repo' from the git remote so the badge URL is correct."""
-    try:
-        url = subprocess.check_output(
-            ["git", "remote", "get-url", "origin"], text=True, stderr=subprocess.DEVNULL
-        ).strip()
-    except Exception:
-        return "YOUR-GITHUB-USERNAME/python-text-analytics-lab"
-    m = re.search(r"(?:github\.com[:/])([^/]+)/([^/]+?)(?:\.git)?$", url)
-    return f"{m.group(1)}/{m.group(2)}" if m else "YOUR-GITHUB-USERNAME/python-text-analytics-lab"
 
 
 def scaffold(num: str, slug: str, title: str) -> Path:
@@ -43,13 +26,7 @@ def scaffold(num: str, slug: str, title: str) -> Path:
         sys.exit(f"Refusing to overwrite existing {master}")
     folder.mkdir(parents=True, exist_ok=True)
 
-    student_rel = f"labs/lab{num}_{slug}/lab{num}_student.ipynb"
-    badge_url = f"https://colab.research.google.com/github/{github_slug()}/blob/{BRANCH}/{student_rel}"
-
     cells = [
-        new_markdown_cell(
-            f"[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)]({badge_url})"
-        ),
         new_markdown_cell(f"# Lab {num} — {title}\n\n### Digital Skills and Business Decisioning Using Python"),
     ]
 
